@@ -42,6 +42,10 @@ class Home extends React.Component {
                     {this.state.posts.map(function(post, index){
                         return(
                         <div className={styles.card} key={ index}>
+                            { post.fimg_url
+                                ? <img  className={styles.cardImage} alt={post.title} src={post.fimg_url}></img>
+                                : ""
+                            }
                             <h1 className={styles.cardTitle} key={ index + 1}>{post.title.rendered}</h1>
                             <p className={styles.cardContent} key={ index + 2}>{post.content.rendered}</p>
                         </div>
