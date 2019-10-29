@@ -1,4 +1,5 @@
 import React from 'react';
+import { ClipLoader } from 'react-spinners';
 
 import styles from '../css/home.module.css'
 
@@ -7,18 +8,26 @@ class Home extends React.Component {
         super(props)
         this.getPosts = this.getPosts.bind(this)
         this.state = {
-            posts: []
+            posts: [],
+            loading: false
         }
     }
 
     componentDidMount() {
         this.getPosts()
     }
-    
+
+    rmToken() {
+        localStorage.removeItem('bearerToken')
+        window.location.reload()
+    }
 
     getPosts = () => {
-        var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODA4MCIsImlhdCI6MTU3MTg0ODI4OCwibmJmIjoxNTcxODQ4Mjg4LCJleHAiOjE1NzI0NTMwODgsImRhdGEiOnsidXNlciI6eyJpZCI6IjEifX19.OM9-o-X6x1RRjKmlWg298RNxoEbo9Z7KCHmm8HfYHac';
-        fetch('http://localhost:8080/wp/wp-json/wp/v2/posts', {
+        this.setState({
+            loading: true
+        })
+        var token = localStorage.getItem('bearerToken')
+        fetch(process.env.REACT_APP_WP_URL + '/wp/wp-json/wp/v2/posts', {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
@@ -29,33 +38,51 @@ class Home extends React.Component {
             return response.json();
         }).then((data) => {
             this.setState({
-                posts: data
+                posts: data,
+                loading: false
             })
         });
     }
 
     render() {
-        return (
-            <div>
-                <h1>Posts</h1>
-                <div className={styles.container}>
-                    {this.state.posts.map(function(post, index){
-                        return(
-                        <div className={styles.card} key={ index}>
-                            { post.fimg_url
-                                ? <img  className={styles.cardImage} alt={post.title} src={post.fimg_url}></img>
-                                : ""
-                            }
-                            <h1 className={styles.cardTitle} key={ index + 1}>{post.title.rendered}</h1>
-                            <p className={styles.cardContent} key={ index + 2}>{post.content.rendered}</p>
-                        </div>
-                        )
-                    })}
+        if(localStorage.getItem('bearerToken'))
+            return (
+                <div>
+                    <h1>Posts</h1>
+                    <div className={styles.container}>
+                            <ClipLoader
+                            css={'margin: 0 auto;'}
+                            sizeUnit={"px"}
+                            size={30}
+                            color={'#123abc'}
+                            loading={this.state.loading}
+                            />
+                        {this.state.posts.map(function(post, index){
+                            return(
+                            <div className={styles.card} key={ index}>
+                                { post.fimg_url
+                                    ? <img  className={styles.cardImage} alt={post.title} src={post.fimg_url}></img>
+                                    : ""
+                                }
+                                <h2 className={styles.cardTitle} key={ index + 1}>{post.title.rendered}</h2>
+                                <p className={styles.cardContent} key={ index + 2}>{post.content.rendered}</p>
+                            </div>
+                            )
+                        })}
+                    </div>
+                    <button onClick={this.rmToken}>Remove bearer token</button>
                 </div>
-            </div>
-        )
+            )
+        else
+            return (
+                <div>
+                    <h1>Posts</h1>
+                    <div className={styles.container}>
+                        <p>Login to view posts.</p>
+                    </div>
+                </div>
+            )
     }
 }
-
 
 export default Home

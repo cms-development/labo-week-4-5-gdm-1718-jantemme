@@ -96,6 +96,7 @@ class StarterSite extends Timber\Site {
 		// die('test');
 		wp_enqueue_style('main', get_template_directory_uri() . '/assets/css/main.css', array(), '1.0.0');
 	} 
+	
 
 	/** This is where you can register custom post types. */
 	public function register_post_types() {
