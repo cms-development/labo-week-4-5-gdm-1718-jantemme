@@ -26,13 +26,11 @@ class Home extends React.Component {
         this.setState({
             loading: true
         })
-        var token = localStorage.getItem('bearerToken')
         fetch(process.env.REACT_APP_WP_URL + '/wp/wp-json/wp/v2/posts', {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                'Authorization': 'Bearer ' + token
             }
         }).then((response) => {
             return response.json();
@@ -45,43 +43,33 @@ class Home extends React.Component {
     }
 
     render() {
-        if(localStorage.getItem('bearerToken'))
-            return (
-                <div>
-                    <h1>Posts</h1>
-                    <div className={styles.container}>
-                            <ClipLoader
-                            css={'margin: 0 auto;'}
-                            sizeUnit={"px"}
-                            size={30}
-                            color={'#123abc'}
-                            loading={this.state.loading}
-                            />
-                        {this.state.posts.map(function(post, index){
-                            return(
-                            <div className={styles.card} key={ index}>
-                                { post.fimg_url
-                                    ? <img  className={styles.cardImage} alt={post.title} src={post.fimg_url}></img>
-                                    : ""
-                                }
-                                <h2 className={styles.cardTitle} key={ index + 1}>{post.title.rendered}</h2>
-                                <p className={styles.cardContent} key={ index + 2}>{post.content.rendered}</p>
-                            </div>
-                            )
-                        })}
-                    </div>
-                    <button onClick={this.rmToken}>Remove bearer token</button>
+        return (
+            <div>
+                <h1>Posts</h1>
+                <div className={styles.container}>
+                        <ClipLoader
+                        css={'margin: 0 auto;'}
+                        sizeUnit={"px"}
+                        size={30}
+                        color={'#123abc'}
+                        loading={this.state.loading}
+                        />
+                    {this.state.posts.map(function(post, index){
+                        return(
+                        <div className={styles.card} key={ index}>
+                            { post.fimg_url
+                                ? <img  className={styles.cardImage} alt={post.title} src={post.fimg_url}></img>
+                                : ""
+                            }
+                            <h2 className={styles.cardTitle} key={ index + 1}>{post.title.rendered}</h2>
+                            <p className={styles.cardContent} key={ index + 2}>{post.content.rendered}</p>
+                        </div>
+                        )
+                    })}
                 </div>
-            )
-        else
-            return (
-                <div>
-                    <h1>Posts</h1>
-                    <div className={styles.container}>
-                        <p>Login to view posts.</p>
-                    </div>
-                </div>
-            )
+                <button onClick={this.rmToken}>Remove bearer token</button>
+            </div>
+        )
     }
 }
 

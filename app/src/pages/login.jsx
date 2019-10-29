@@ -15,10 +15,6 @@ class Login extends React.Component {
     }
 
     componentDidMount() {
-        this.lookForToken()
-    }
-    
-    lookForToken =() => {
         if(localStorage.getItem('bearerToken')) {
             window.alert("Already logged in.")
             window.history.back(); 
@@ -49,7 +45,7 @@ class Login extends React.Component {
             this.setState({
                 errorMessage: ""
             })
-            window.location.assign(process.env.REACT_APP_REACT_URL + '/'); 
+            window.location.assign(process.env.REACT_APP_REACT_URL + '/admin'); 
         } else {
             this.setState({
                 errorMessage: "Wrong credentials."
@@ -70,7 +66,7 @@ class Login extends React.Component {
     render() {
         return (
             <div>
-                <h1>Login</h1>
+                <h2>Login</h2>
                 <div className={styles.formContainer} >
                     <form method="post">
                         <div className={styles.inputContainer}>
