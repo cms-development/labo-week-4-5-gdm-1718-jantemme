@@ -1,0 +1,61 @@
+.dashboardContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    width: 46%;
+    border-radius: 15px;
+    padding: 18px;
+
+    -webkit-box-shadow: 10px 10px 34px -2px rgba(0,0,0,0.48);
+    -moz-box-shadow: 10px 10px 34px -2px rgba(0,0,0,0.48);
+    box-shadow: 10px 10px 34px -2px rgba(0,0,0,0.48);
+}
+
+.dashboardContainer p {
+    margin: 0;
+}
+
+.dashboardContainer h2 {
+    margin: 0;
+}
+
+.dashboardContainer h3 {
+    margin: 20px 0 6px;
+}
+
+.container {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.postContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid gray;
+    padding: 6px 0;
+    cursor: pointer;
+}
+
+.button {
+    width: 20%;
+    height: 30px;
+    border-radius: 3px;
+    margin: 10px auto;
+    background: red;
+    font-size: 100%;
+    color: white;
+    border: none;
+}
+
+h4 {
+    margin: 0 0 4px;
+}

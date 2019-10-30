@@ -45,3 +45,7 @@ h1 {
   width: 80%;
   margin: 20px auto;
 }
+
+button {
+  cursor: pointer;
+}

@@ -17,11 +17,6 @@ class Home extends React.Component {
         this.getPosts()
     }
 
-    rmToken() {
-        localStorage.removeItem('bearerToken')
-        window.location.reload()
-    }
-
     getPosts = () => {
         this.setState({
             loading: true
@@ -42,6 +37,12 @@ class Home extends React.Component {
         });
     }
 
+    goToPostDetail = (e) => {
+        const postId = e.target.id
+        localStorage.setItem('postId', postId)
+        window.location.assign(process.env.REACT_APP_REACT_URL + '/post/' + postId); 
+    }
+
     render() {
         return (
             <div>
@@ -54,20 +55,19 @@ class Home extends React.Component {
                         color={'#123abc'}
                         loading={this.state.loading}
                         />
-                    {this.state.posts.map(function(post, index){
+                    {this.state.posts.map((post, index) => {
                         return(
-                        <div className={styles.card} key={ index}>
+                        <div className={styles.card} id={post.id} key={ index} onClick={this.goToPostDetail}>
                             { post.fimg_url
-                                ? <img  className={styles.cardImage} alt={post.title} src={post.fimg_url}></img>
+                                ? <img  id={post.id} className={styles.cardImage} alt={post.title} src={post.fimg_url}></img>
                                 : ""
                             }
-                            <h2 className={styles.cardTitle} key={ index + 1}>{post.title.rendered}</h2>
-                            <p className={styles.cardContent} key={ index + 2}>{post.content.rendered}</p>
+                            <h2 id={post.id} className={styles.cardTitle} key={ index + 1}>{post.title.rendered}</h2>
+                            <p id={post.id} className={styles.cardContent} key={ index + 2}>{post.content.rendered}</p>
                         </div>
                         )
                     })}
                 </div>
-                <button onClick={this.rmToken}>Remove bearer token</button>
             </div>
         )
     }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { ClipLoader } from 'react-spinners';
 
 import styles from '../css/addPost.module.css'
 
@@ -12,6 +13,7 @@ class AddPosts extends React.Component {
             title: '',
             content: '',
             errorMessage: "",
+            loading: false,
         }
     }
 
@@ -32,14 +34,22 @@ class AddPosts extends React.Component {
         }).then((response) => {
             return response.json();
         }).then((data) => {
+            this.setState({
+                loading: false
+            })
             this.checkResponse(data)
         });
     }
 
     uploadImage = () => {
-        const token = localStorage.getItem('bearerToken')
+        const token = JSON.parse(localStorage.getItem('userObject')).token
         const image = this.fileInput.current.files[0]
         const formData = new FormData()
+
+        this.setState({
+            loading: true
+        })
+
         formData.append('file', image)
         fetch(process.env.REACT_APP_WP_URL + '/wp/wp-json/wp/v2/media', {
             method: "POST",
@@ -60,7 +70,7 @@ class AddPosts extends React.Component {
             this.setState({
                 errorMessage: ""
             })
-            window.location.assign(process.env.REACT_APP_REACT_URL + '/'); 
+            window.history.back();  
         } else {
             this.setState({
                 errorMessage: "Something went wrong.. Are you logged in?"
@@ -79,7 +89,7 @@ class AddPosts extends React.Component {
     }
 
     render() {
-            if(localStorage.getItem('bearerToken'))
+            if(localStorage.getItem('userObject'))
             return (
                 <div>
                     <h1>Add a post</h1>
@@ -108,6 +118,13 @@ class AddPosts extends React.Component {
                                 
                             </div>
                         </form>
+                        <ClipLoader
+                        css={'margin: 0 auto;'}
+                        sizeUnit={"px"}
+                        size={30}
+                        color={'#123abc'}
+                        loading={this.state.loading}
+                        />
                         <button className={styles.button} type='Submit' onClick={this.uploadImage}>Publish</button>
                         <p>{this.state.errorMessage}</p>
                     </div>

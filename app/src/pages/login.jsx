@@ -15,7 +15,7 @@ class Login extends React.Component {
     }
 
     componentDidMount() {
-        if(localStorage.getItem('bearerToken')) {
+        if(localStorage.getItem('userObject')) {
             window.alert("Already logged in.")
             window.history.back(); 
         }
@@ -41,7 +41,7 @@ class Login extends React.Component {
 
     checkResponse = (data) => {
         if(data.token) {
-            localStorage.setItem('bearerToken', data.token)
+            localStorage.setItem('userObject', JSON.stringify(data))
             this.setState({
                 errorMessage: ""
             })

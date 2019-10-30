@@ -14,15 +14,13 @@ import Dashboard from './dashboard'
 class Admin extends React.Component {
 
   componentDidMount = () => {
-    if(!localStorage.getItem('bearerToken'))
-      window.location.assign(process.env.REACT_APP_REACT_URL + '/login'); 
+    if(!localStorage.getItem('userObject'))
+      window.location.assign(process.env.REACT_APP_REACT_URL + '/login')
   }
   
   render() {
-  return (
-    <div className={styles.container}>
+    return (
       <Router>
-      <div>
         <nav className={styles.navContainer}>
           <Link to="/admin">Dashboard</Link>
           <Link to="/admin/addPost">Add Post</Link>
@@ -35,11 +33,8 @@ class Admin extends React.Component {
             <Dashboard />
           </Route>
         </Switch>
-      </div>
-    </Router>
-    
-    </div>
-    );
+      </Router>
+    )
   }
 }
 
