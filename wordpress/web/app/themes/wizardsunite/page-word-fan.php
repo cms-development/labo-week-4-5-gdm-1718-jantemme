@@ -14,4 +14,4 @@ $context['post'] = Timber::get_posts(array('post_type'=>'page'));
 $context['wizardsunite_logo_url'] = wp_get_attachment_image_url( get_theme_mod('custom_logo'), 'full');
 $context['wizardsunite_header_image_url'] = get_header_image();
 
-Timber::render( 'page.twig', $context );
+Timber::render( 'page-magical-creatures.twig', $context );

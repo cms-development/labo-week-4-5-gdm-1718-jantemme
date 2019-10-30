@@ -1,0 +1,52 @@
+{% block html_head_container %}
+
+{% include 'html-header.twig' %}
+{% endblock %}
+
+		<div class="main-wrapper">
+        <!-- page content -->
+        <div class="container">
+
+            <!-- cards level 1-->
+            <div class="row">
+                <!-- card 1.1 -->
+                <div class="col-12 col-md-9">
+                   <h2>{{ posts[0].title }}</h2> 
+                   {% for creature in creatures %}
+
+                        <div class="col-12 col-md-4">
+                   
+                            <div class="card">
+                                <div class="card_image_container">
+                                    <img src="{{ TimberImage(creature.thumbnail).src }}" alt="Buckbeak">
+                                </div>
+                                <div class="card_txt_container">
+                                    <h2><a href="#">{{ creature.title }}</a></h2>
+                                    <p>
+                                            {{ creature.content }}
+                                    </p>
+                                    
+                                </div>
+                            </div>
+                            <!-- end card-->
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+                <div class="col-12 col-md-3">
+                    <h2>Sidebar</h2>
+                    <p>Sidebar with NO widget area - Homepage (hardcoded text)</p>
+                </div>
+
+            </div>
+             <!-- end row-->
+
+        </div>
+        <!-- end container-->
+    </div>
+
+	{% include 'footer.twig' %}
+	</body>
+</html>

@@ -8,3 +8,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     {{function('wp_head')}}
+
+    <body class="{{body_class}}" data-template="base.twig">
+		<header class="header-wrapper" style="background-image: url('{{wizardsunite_header_image_url}}');">
+        
+            <a href="" class="logo"><img src="{{wizardsunite_logo_url}}" alt="Wizards Unite"></a>
+			
+			<!-- navigatie -->
+			<div class="container header_container">
+				<div class="row">
+					<div class="col-12 col-md-6">
+						<h1 class="logo">{{site.title}}</h1>
+					</div>
+					<div class="col-12 col-md-6 nav">
+						<nav class="nav-main">
+							<ul class="navbar-right">
+								<li class="page_item"><a class="nav-item__link" href="/" title="Fans">De Fanclub</a></li>
+								<li class="page_item"><a class="nav-item__link" href="/magical-creatures" title="Creatures">Magical Creatures</a></li>
+								<li class="page_item"><a class="nav-item__link" href="/word-fan" title="Contact">Word fan!</a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</header>
