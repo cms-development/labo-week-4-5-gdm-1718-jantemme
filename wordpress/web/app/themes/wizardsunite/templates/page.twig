@@ -1,14 +1,71 @@
-{% extends "base.twig" %}
+{% block html_head_container %}
 
-{% block content %}
-	<div class="content-wrapper">
-		<article class="post-type-{{post.post_type}}" id="post-{{post.ID}}">
-			<section class="article-content">
-				<h1 class="article-h1">{{post.title}}</h1>
-				<div class="article-body">
-					{{post.content}}
-				</div>
-			</section>
-		</article>
-	</div><!-- /content-wrapper -->
+{% include 'html-header.twig' %}
+	{% block head %}
+	{% endblock %}
+	</head>
 {% endblock %}
+
+	<body class="{{body_class}}" data-template="base.twig">
+		<header class="header-wrapper" style="background-image: url('{{wizardsunite_header_image_url}}');">
+        
+            <a href="" class="logo"><img src="{{wizardsunite_logo_url}}" alt="Wizards Unite"></a>
+			
+			<!-- navigatie -->
+			<div class="container header_container">
+				<div class="row">
+					<div class="col-12 col-md-6">
+						<h1 class="logo">{{site.title}}</h1>
+					</div>
+					<div class="col-12 col-md-6 nav">
+						<nav class="nav-main">
+							<ul class="navbar-right">
+								<li class="page_item"><a class="nav-item__link active" href="index.html" title="Fans">De Fanclub</a></li>
+								<li class="page_item"><a class="nav-item__link" href="creatures.html" title="Creatures">Magical Creatures</a></li>
+								<li class="page_item"><a class="nav-item__link" href="wordfan.html" title="Contact">Word fan!</a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<div class="main-wrapper">
+        <!-- page content -->
+        <div class="container">
+
+            <!-- cards level 1-->
+            <div class="row">
+                <!-- card 1.1 -->
+                <div class="col-12 col-md-9">
+                   <h2>Content</h2> 
+                   <p>
+                       Hier komt de fanlijst
+                   </p>
+
+                </div>
+                <div class="col-12 col-md-3">
+                    <h2>Sidebar</h2>
+                    <p>Sidebar with NO widget area - Homepage (hardcoded text)</p>
+                </div>
+
+            </div>
+             <!-- end row-->
+
+        </div>
+        <!-- end container-->
+    </div>
+
+		{% block footer %}
+			<footer class="footer-wrapper">
+				<div class="container footer_container">
+					<div class="row">
+						<div class="col-12 col-md-6">Widget Area one</div>
+						<div class="col-12 col-md-6">Widget Area two</div>
+					</div>
+				</div>
+			</footer>
+			{{ function('wp_footer') }}
+		{% endblock %}
+	</body>
+</html>

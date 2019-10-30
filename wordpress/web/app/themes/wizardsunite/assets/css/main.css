@@ -457,7 +457,6 @@ Navigation
     background-size: cover;
     padding: 100px 0 0;
     margin-bottom: calc(var(--grid-gutter)*1);
-    background-image: url('./images/banner.jpg');
     transition: all 368ms ease 0s;
 }
 .header-wrapper:hover {

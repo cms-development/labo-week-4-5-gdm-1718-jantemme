@@ -85,7 +85,7 @@ class AddPosts extends React.Component {
                             <button className={styles.button} onClick={this.removeUserFromLS}>Logout</button>
                         </div>
                         <div className={styles.dashboardContainer}>
-                            <h2>Posts</h2>
+                            <h2>Creatures</h2>
                             <ClipLoader
                             css={'margin: 0 auto;'}
                             sizeUnit={"px"}

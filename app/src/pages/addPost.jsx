@@ -132,9 +132,9 @@ class AddPosts extends React.Component {
     }
 
     render() {
-        let heading = <h1>Add a post</h1>
+        let heading = <h1>Add a creature</h1>
         if(window.location.href.indexOf("edit") > -1)
-            heading = <h1>Edit This Post</h1>
+            heading = <h1>Edit this creature</h1>
         
         if(localStorage.getItem('userObject'))
         return (
@@ -143,7 +143,7 @@ class AddPosts extends React.Component {
                 <div className={styles.formContainer} >
                     <form method="post">
                         <div className={styles.inputContainer}>
-                            <label className={styles.label}>Title</label>
+                            <label className={styles.label}>Name</label>
                             <input
                                 className={styles.input} 
                                 name="title"
@@ -152,7 +152,7 @@ class AddPosts extends React.Component {
                                 onChange={this.handleInputChange} />
                         </div>
                         <div className={styles.inputContainer}>
-                            <label className={styles.label}>Content</label>
+                            <label className={styles.label}>Description</label>
                             <textarea
                                 className={styles.textarea} 
                                 name="content"
@@ -180,7 +180,7 @@ class AddPosts extends React.Component {
     else
         return (
             <div>
-                <h1>Add a post</h1>
+                <h1>Add a creature</h1>
                 <div className={styles.container}>
                     <p>Login to add posts.</p>
                 </div>

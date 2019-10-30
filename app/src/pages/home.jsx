@@ -21,6 +21,7 @@ class Home extends React.Component {
         this.setState({
             loading: true
         })
+        console.log(process.env.REACT_APP_WP_URL )
         fetch(process.env.REACT_APP_WP_URL + '/wp/wp-json/wp/v2/posts', {
             method: "GET",
             headers: {
@@ -46,7 +47,7 @@ class Home extends React.Component {
     render() {
         return (
             <div>
-                <h1>Posts</h1>
+                <h1>Creatures</h1>
                 <div className={styles.container}>
                         <ClipLoader
                         css={'margin: 0 auto;'}

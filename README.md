@@ -1,10 +1,8 @@
 # Headless Wordpress with React front-end
 
 ## Screencast op Vimeo
-
-[![IMAGE ALT TEXT](https://i.vimeocdn.com/video/826938799.webp?mw=1800&mh=1125&q=70)](https://vimeo.com/369872586 "Headless Wordpress with a React front-end")
-
-
+[![IMAGE ALT TEXT](https://i.vimeocdn.com/video/826979638.webp?mw=1800&mh=1125&q=70)](https://vimeo.com/369904594 "Headless Wordpress with a React front-end")
+https://vimeo.com/369904594
 
 ## Running the project
 
@@ -12,6 +10,8 @@ Clone het project
 ```
 git clone https://github.com/cms-development/labo-week-4-5-gdm-1718-jantemme
 ```
+
+Maak een sql database aan en maak de ".env" file in orde voor het wordpress project.
 
 Navigeer in de terminal vanuit de root van het project naar de 'wordpress'-map en voer 'composer install' uit. Start daarne de wordpress server met 'wp server'.
 ```

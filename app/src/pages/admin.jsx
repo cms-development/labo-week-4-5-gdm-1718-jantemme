@@ -23,7 +23,7 @@ class Admin extends React.Component {
       <Router>
         <nav className={styles.navContainer}>
           <Link to="/admin">Dashboard</Link>
-          <Link to="/admin/addPost">Add Post</Link>
+          <Link to="/admin/addPost">Add Creature</Link>
         </nav>
         <Switch>
           <Route exact path="/admin/addPost">

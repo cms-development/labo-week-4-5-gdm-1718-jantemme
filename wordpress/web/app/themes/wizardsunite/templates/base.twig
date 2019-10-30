@@ -7,16 +7,15 @@
 {% endblock %}
 
 	<body class="{{body_class}}" data-template="base.twig">
-		<a class="skip-link screen-reader-text" href="#content">{{ _e( 'Skip to content') }}</a>
 		<header class="header-wrapper">
         
-            <a href="" class="logo"><img src="./images/logo.png" alt="Wizards Unite"></a>
+            <a href="" class="logo"><img src="{{wizardsunite_logo_url}}" alt="Wizards Unite"></a>
 			
 			<!-- navigatie -->
 			<div class="container header_container">
 				<div class="row">
 					<div class="col-12 col-md-6">
-						<h1 class="logo">Wizards Unite Fanpage</h1>
+						<h1 class="logo">{{site.title}}</h1>
 					</div>
 					<div class="col-12 col-md-6 nav">
 						<nav class="nav-main">
