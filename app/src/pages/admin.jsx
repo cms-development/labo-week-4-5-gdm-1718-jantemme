@@ -26,10 +26,13 @@ class Admin extends React.Component {
           <Link to="/admin/addPost">Add Post</Link>
         </nav>
         <Switch>
-          <Route path="/admin/addPost">
+          <Route exact path="/admin/addPost">
             <AddPost />
           </Route>
-          <Route path="/admin">
+          <Route path="/admin/post/:id/edit">
+            <AddPost />
+          </Route>
+          <Route exact path="/admin">
             <Dashboard />
           </Route>
         </Switch>

@@ -59,12 +59,34 @@ class PostDetail extends React.Component {
         }
     }
 
+    goToPostEdit = (e) => {
+        const postId = e.target.id
+        localStorage.setItem('postId', postId)
+        window.location.assign(process.env.REACT_APP_REACT_URL + '/admin/post/' + postId + '/edit'); 
+    }
+
     render() {
 
-        let deleteButton = ""
+        let buttons = ""
+
+        let stats = ""
 
         if(localStorage.getItem('userObject'))
-            deleteButton = <button className={styles.button} onClick={this.deletePost}>Delete post</button>
+            buttons = 
+                <div className={styles.buttonContainer}>
+                    <button className={styles.buttonDelete} onClick={this.deletePost}>Delete post</button>
+                    <button id={this.state.post.id} className={styles.buttonEdit} onClick={this.goToPostEdit}>Edit post</button>
+                </div>
+
+        if(this.state.post.custom_fields)
+            stats = <div className={styles.contentContainer}>
+                    <h3>XP</h3>
+                    <p className={styles.content}>{this.state.post.custom_fields.xp}</p>
+                    <h3>Spell</h3>
+                    <p className={styles.content}>{this.state.post.custom_fields.spell}</p>
+                    <h3>Confoundable</h3>
+                    <p className={styles.content}>{this.state.post.custom_fields.confoundable}</p>
+                </div>
 
         if(this.state.post.title)
             return (
@@ -84,7 +106,8 @@ class PostDetail extends React.Component {
                             <div className={styles.contentContainer}>
                                 <h1>{this.state.post.title.rendered}</h1>
                                 <p className={styles.content}>{this.state.post.content.rendered}</p>
-                                {deleteButton}
+                                {stats}
+                                {buttons}
                             </div>
                     </div>
                 </div>

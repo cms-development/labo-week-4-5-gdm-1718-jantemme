@@ -40,7 +40,128 @@ function get_rest_featured_image( $object, $field_name, $request ) {
     return false;
 }
 
+function init() {
+	add_filter( 'rest_prepare_creatures', [ $this, 'add_featured_image' ], 10, 2 );
+
+}
+function add_featured_image( $data, $post ) {
+	$sizes        = [ 'thumbnail' => '', 'medium' => '', 'large' => '', 'full' => '' ];
+	$_data        = $data->data;
+	$thumbnail_id = get_post_thumbnail_id( $post->ID );
+	foreach ( $sizes as $size => $src ) {
+		$sizes[ $size ] = wp_get_attachment_image_src( $thumbnail_id, $size )[0];
+	}
+	$_data['featured_image_url'] = $sizes;
+	$data->data                  = $_data;
+	return $data;
+}
+
 add_theme_support( 'custom-logo' );
+
+function create_posttype() {
+	register_post_type( 'creatures',
+	// CPT Options
+	array(
+	  'labels' => array(
+	   'name' => __( 'creatures' ),
+	   'singular_name' => __( 'Creatures' )
+	  ),
+	  'public' => true,
+	  'has_archive' => false,
+	  'rewrite' => array('slug' => 'creatures'),
+	 )
+	);
+	}
+	// Hooking up our function to theme setup
+	add_action( 'init', 'create_posttype' );
+
+function cw_post_type_news() {
+	$supports = array(
+	'title', // post title
+	'editor', // post content
+	'author', // post author
+	'thumbnail', // featured images
+	'featured-images',
+	'custom-fields', // custom fields
+	'revisions', // post revisions
+	'post-formats', // post formats
+	);
+	$labels = array(
+	'name' => _x('creatures', 'plural'),
+	'singular_name' => _x('creature', 'singular'),
+	'menu_name' => _x('creatures', 'admin menu'),
+	'name_admin_bar' => _x('creatures', 'admin bar'),
+	'add_new' => _x('Add New', 'add new'),
+	'add_new_item' => __('Add New Creature'),
+	'new_item' => __('New creatures'),
+	'edit_item' => __('Edit creatures'),
+	'view_item' => __('View creatures'),
+	'all_items' => __('All creatures'),
+	'search_items' => __('Search creatures'),
+	'not_found' => __('No creatures found.'),
+	);
+	$args = array(
+	'supports' => $supports,
+	'labels' => $labels,
+	'public' => true,
+	'query_var' => true,
+	'rewrite' => array('slug' => 'news'),
+	'has_archive' => true,
+	'hierarchical' => false,
+	);
+	register_post_type('news', $args);
+}
+		
+	
+add_action( 'init', 'my_creatures_cpt' );
+function my_creatures_cpt() {
+    $args = array(
+      'public'       => true,
+      'show_in_rest' => true,
+      'label'        => 'Creatures'
+    );
+    register_post_type( 'creatures', $args );
+}
+
+add_action( 'rest_api_init', 'add_custom_fields' );
+function add_custom_fields() {
+	register_rest_field(
+	'creatures', 
+	'custom_fields', //New Field Name in JSON RESPONSEs
+	array(
+		'get_callback'    => 'get_custom_fields', // custom function name 
+		'update_callback' => 'update_custom_fields',
+		'schema'          => null,
+		)
+	);
+}
+
+add_action( 'rest_api_init', 'add_custom_fields_posts' );
+function add_custom_fields_posts() {
+	register_rest_field(
+	'post', 
+	'custom_fields', //New Field Name in JSON RESPONSEs
+	array(
+		'get_callback'    => 'get_custom_fields', // custom function name 
+		'update_callback' => 'update_custom_fields',
+		'schema'          => null,
+		)
+	);
+}
+
+function get_custom_fields( $object, $field_name, $request ) {
+	$Id = $object['id'];
+	return get_fields($Id);
+}
+
+function update_custom_fields( $value, $object, $field_name ) {
+
+	if ( ! $value ) {
+		return;
+	}
+	
+	return update_post_meta( $object->ID, $field_name, $value );
+}
 
 /**
  * This ensures that Timber is loaded and available as a PHP class.

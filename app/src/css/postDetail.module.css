@@ -5,6 +5,14 @@
     flex-direction: column;
 }
 
+.buttonContainer {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
 .contentContainer h1, p {
     margin: 10px 0 20px 0;
 }
@@ -20,12 +28,23 @@
     margin: 0 auto;
 }
 
-.button {
+.buttonDelete {
     width: 20%;
     height: 30px;
     border-radius: 3px;
     margin: 10px auto;
     background: red;
+    font-size: 100%;
+    color: white;
+    border: none;
+}
+
+.buttonEdit {
+    width: 20%;
+    height: 30px;
+    border-radius: 3px;
+    margin: 10px auto;
+    background: rgb(102, 160, 226);
     font-size: 100%;
     color: white;
     border: none;
@@ -37,4 +56,12 @@ img {
     margin: 0px;
     border-radius: 10px;
     object-fit: cover;
+}
+
+h3 {
+    margin: 0;
+}
+
+p {
+    padding: 0 10px;
 }
